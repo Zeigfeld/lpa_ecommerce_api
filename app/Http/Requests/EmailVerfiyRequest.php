@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AuthUserRequest extends BaseApiRequest
+class EmailVerfiyRequest extends BaseApiRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,16 +22,18 @@ class AuthUserRequest extends BaseApiRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|email',
-            'password' => 'required'
+            'token' => 'required',
+            'verification_code' => 'required|max:4|min:4'
         ];
     }
 
-    public function messages(): array
+    public function messages() : array
     {
         return [
-            'email' => 'Email is required',
-            'password' => 'Password is required'
+            'token.required' => 'Token is required',
+            'verification_code.required' => 'Verification code is required',
+            'verification_code.max' => 'Invalid Verification code',
+            'verification_code.min' => 'Invalid Verification code',
         ];
     }
 }
